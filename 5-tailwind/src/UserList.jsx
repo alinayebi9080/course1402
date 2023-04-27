@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import toast from "react-hot-toast";
+import AddForm from "./components/AddForm";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -30,26 +31,13 @@ const UserList = () => {
   };
 
   const handleAdd = () => {
-    //shallow copy
-    // const copy = [...users];
-    // copy.push({ first_name: fistName, id: users.length + 1 });
-    // setUsers(copy);
-
     const newUser = { first_name: fistName, id: users.length + 1 };
     setUsers([...users, newUser]);
   };
 
   return (
     <div className="container">
-      <form>
-        <input
-          className="border p-2 m-2"
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <button className="bg-purple-200 p-2 rounded" onClick={handleAdd}>
-          Add
-        </button>
-      </form>
+      <AddForm setFirstName={setFirstName} handleAdd={handleAdd} />
       <table className="w-full m-4 shadow-md rounded overflow-hidden">
         <thead>
           <tr className="text-white bg-slate-900">
