@@ -1,8 +1,23 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-const Product = ({ _id, title, description, imageUrl, selling_price }) => {
+const Product = ({
+  _id,
+  title,
+  description,
+  imageUrl,
+  selling_price,
+  handleAddToBasket,
+}) => {
+  const navigate = useNavigate();
+
+  const addToBasket = (e) => {
+    e.stopPropagation();
+    handleAddToBasket(_id);
+  };
+
   return (
-    <Link to={`/product/${_id}`}>
+    <div onClick={() => navigate(`/product/${_id}`)}>
       <div className="flex flex-col border drop-shadow-lg justify-between">
         <div className="p-4">
           <img className="object-cover w-48 h-auto mx-auto" src={imageUrl} />
@@ -17,12 +32,15 @@ const Product = ({ _id, title, description, imageUrl, selling_price }) => {
           )} ریال`}</p>
         </div>
         <div>
-          <button className="p-2 border bg-gray-100 w-full text-gray-500 hover:bg-gray-50">
+          <button
+            className="p-2 border bg-gray-100 w-full text-gray-500 hover:bg-gray-50"
+            onClick={addToBasket}
+          >
             اضافه به سبد خرید
           </button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

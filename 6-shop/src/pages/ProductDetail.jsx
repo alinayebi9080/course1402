@@ -1,15 +1,18 @@
 import { useParams } from "react-router-dom";
 import useQuery from "../hook/useQuery";
 import { getDetail } from "../service/productService";
+import { useEffect } from "react";
+import Header from "../components/common/Header";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const { data: product, error, loading } = useQuery(() => getDetail(id));
+  const { data: product } = useQuery(() => getDetail(id));
 
-  if (loading) return <p>LOADING ....</p>;
-  if (error) return <p>{error.response.statusText}</p>;
-
-  return <div>{product?.title}</div>;
+  return (
+    <div>
+      <p>{product?.title}</p>
+    </div>
+  );
 };
 
 export default ProductDetail;

@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { QueryContext } from "../context/QueryProvider";
 
 const useQuery = (func, dep = []) => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
   const [data, setData] = useState();
+
+  const { setError, setLoading, error, loading } = useContext(QueryContext);
 
   const handleGetData = async () => {
     setLoading(true);
@@ -11,7 +12,7 @@ const useQuery = (func, dep = []) => {
       const data = await func();
       setData(data);
     } catch (err) {
-      setError(err.response.statusText);
+      setError(err?.response);
     }
     setLoading(false);
   };
