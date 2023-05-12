@@ -8,7 +8,6 @@ const Factor = () => {
 
   const { data: factor = [] } = useQuery(() => getDetails(basket));
 
-  console.log(factor);
   return (
     <div>
       {factor.map((item) => (

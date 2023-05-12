@@ -1,16 +1,19 @@
 import MainRouter from "./components/MainRouter";
+import AuthProvider from "./context/AuthContext";
 import BasketProvider from "./context/BasketProvider";
-import QueryContext from "./context/QueryProvider";
+import QueryProvider from "./context/QueryProvider";
 import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
-    <QueryContext>
-      <BasketProvider>
-        <Toaster />
-        <MainRouter />
-      </BasketProvider>
-    </QueryContext>
+    <QueryProvider>
+      <AuthProvider>
+        <BasketProvider>
+          <Toaster />
+          <MainRouter />
+        </BasketProvider>
+      </AuthProvider>
+    </QueryProvider>
   );
 }
 

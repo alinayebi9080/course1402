@@ -1,8 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-export const BasketContext = createContext({
-  addToBasket: () => {},
-});
+export const BasketContext = createContext();
 
 const BasketProvider = ({ children }) => {
   const [basket, setBasket] = useState([]);

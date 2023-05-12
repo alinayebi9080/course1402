@@ -2,7 +2,7 @@ import Product from "../components/home/Product";
 import Pagination from "../components/common/Pagination";
 import useQuery from "../hook/useQuery";
 import { getAllProduct } from "../service/productService";
-import { Fragment, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { BasketContext } from "../context/BasketProvider";
 
 const Home = () => {

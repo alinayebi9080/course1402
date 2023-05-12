@@ -1,15 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import { QueryContext } from "../context/QueryProvider";
 
-const useQuery = (func, dep = []) => {
+const useMutation = (func, onSuccess) => {
   const [data, setData] = useState();
 
   const { setError, setLoading, error, loading } = useContext(QueryContext);
 
-  const handleGetData = async () => {
+  const mutate = async (body) => {
     setLoading(true);
     try {
-      const data = await func();
+      const data = await func(body);
+      onSuccess(data);
       setData(data);
     } catch (err) {
       setError(err?.response);
@@ -17,11 +18,7 @@ const useQuery = (func, dep = []) => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    handleGetData();
-  }, dep);
-
-  return { error, loading, data, setData };
+  return { error, loading, data, mutate };
 };
 
-export default useQuery;
+export default useMutation;
