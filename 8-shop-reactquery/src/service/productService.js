@@ -1,7 +1,7 @@
-import axios from "axios";
+import axiosInstance from "../util/axiosInstance";
 
 export const getDetail = async (id) => {
-  const { data } = await axios.get(`/api/product/${id}`);
+  const { data } = await axiosInstance.get(`/product/${id}`);
   return data;
 };
 
@@ -15,6 +15,6 @@ export const getDetails = async (ids) => {
 };
 
 export const getAllProduct = async (page) => {
-  const { data } = await axios.get(`/api/product/all?page=${page}`);
+  const { data } = await axiosInstance.get(`/product/all?page=${page}`);
   return data;
 };

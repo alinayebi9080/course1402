@@ -1,19 +1,19 @@
 import MainRouter from "./components/MainRouter";
-import AuthProvider from "./context/AuthContext";
 import BasketProvider from "./context/BasketProvider";
-import QueryProvider from "./context/QueryProvider";
 import { Toaster } from "react-hot-toast";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./util/reactQuery";
 
 function App() {
   return (
-    <QueryProvider>
-      <AuthProvider>
-        <BasketProvider>
-          <Toaster />
-          <MainRouter />
-        </BasketProvider>
-      </AuthProvider>
-    </QueryProvider>
+    <QueryClientProvider client={queryClient}>
+      <BasketProvider>
+        <Toaster />
+        <MainRouter />
+        <ReactQueryDevtools />
+      </BasketProvider>
+    </QueryClientProvider>
   );
 }
 

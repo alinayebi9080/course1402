@@ -1,11 +1,10 @@
 import TextField from "../components/common/TextField";
 import Button from "../components/common/Button";
 import { useFormik } from "formik";
-import useMutation from "../hook/useMutation";
 import { login } from "../service/userService";
-import { Navigate, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { saveUser } from "../util/storage";
 
 const initialValues = {
   email: "",
@@ -14,12 +13,14 @@ const initialValues = {
 
 const Login = () => {
   const navigate = useNavigate();
-
-  const { setUser, user } = useContext(AuthContext);
-
-  const { mutate } = useMutation(login, (data) => {
-    setUser(data);
-    navigate("/");
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: login,
+    onSuccess: (data) => {
+      queryClient.setQueryData(["user", "profile"], data);
+      saveUser(data);
+      navigate("/");
+    },
   });
 
   const formik = useFormik({
@@ -29,9 +30,9 @@ const Login = () => {
     },
   });
 
-  if (user) {
-    return <Navigate to={"/"} />;
-  }
+  // if (user) {
+  //   return <Navigate to={"/"} />;
+  // }
 
   return (
     <div className="container">

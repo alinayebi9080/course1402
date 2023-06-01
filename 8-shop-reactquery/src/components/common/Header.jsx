@@ -1,12 +1,11 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { BasketContext } from "../../context/BasketProvider";
-import { AuthContext } from "../../context/AuthContext";
+import { useProfile } from "../../hook/useUser";
 
 const Header = () => {
   const { basket } = useContext(BasketContext);
-
-  const { user } = useContext(AuthContext);
+  const { data: user } = useProfile();
 
   return (
     <header className="w-full container">

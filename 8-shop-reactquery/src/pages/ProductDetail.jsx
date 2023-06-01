@@ -1,12 +1,9 @@
 import { useParams } from "react-router-dom";
-import useQuery from "../hook/useQuery";
-import { getDetail } from "../service/productService";
-import { useEffect } from "react";
-import Header from "../components/common/Header";
+import { useProductDetail } from "../hook/useProduct";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const { data: product } = useQuery(() => getDetail(id));
+  const { data: product } = useProductDetail(id);
 
   return (
     <div>

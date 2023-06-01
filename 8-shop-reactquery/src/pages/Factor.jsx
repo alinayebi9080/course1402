@@ -1,12 +1,19 @@
 import { useContext } from "react";
 import { BasketContext } from "../context/BasketProvider";
-import useQuery from "../hook/useQuery";
-import { getDetails } from "../service/productService";
+import { useBasketDetail } from "../hook/useProduct";
+import { useProfile } from "../hook/useUser";
+import { Navigate } from "react-router";
 
 const Factor = () => {
   const { basket } = useContext(BasketContext);
 
-  const { data: factor = [] } = useQuery(() => getDetails(basket));
+  const { data: factor = [] } = useBasketDetail(basket);
+
+  const { data: user } = useProfile();
+
+  if (!user) {
+    return <Navigate to={"/login"} />;
+  }
 
   return (
     <div>

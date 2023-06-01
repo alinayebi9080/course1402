@@ -1,9 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "../pages/Home";
 import Login from "../pages/Login";
 import ProductDetail from "../pages/ProductDetail";
 import MainLayout from "./layout/MainLayout";
 import Factor from "../pages/Factor";
+import { lazy } from "react";
+const Home = lazy(() => import("../pages/Home"));
 
 const MainRouter = () => {
   return (
