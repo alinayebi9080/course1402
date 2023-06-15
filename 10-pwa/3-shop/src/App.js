@@ -6,11 +6,20 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./util/reactQuery";
 import { Suspense } from "react";
 import Loading from "./components/common/Loading";
+import UpdateDialog from "./components/common/UpdateDialog";
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BasketProvider>
+        <button
+          id="install_button"
+          hidden
+          className=" w-full text-white bg-red-500 p-2"
+        >
+          نصب
+        </button>
+        <UpdateDialog />
         <Suspense fallback={<Loading />}>
           <Toaster />
           <MainRouter />

@@ -1,5 +1,6 @@
 import ErrorBound from "./ErrorBoundariesExample";
 import MemoExample from "./MemoExample";
+import Modal from "./Modal";
 import UseCallbackExample from "./UseCallbackExample";
 import UseImperativeHandleExample from "./UseImperativeHandleExample";
 import UseMemoExample from "./UseMemoExample";
@@ -7,7 +8,10 @@ import UseMemoExample from "./UseMemoExample";
 function App() {
   return (
     <div>
-      <UseImperativeHandleExample />
+      <Modal>
+        <p>Ali</p>
+      </Modal>
+      <p>Hassan</p>
     </div>
   );
 }
